@@ -9,11 +9,6 @@ function readFile(path) {
 	}
 }
 
-let file = readFile("input1.txt");
-const arr1 = [];
-const arr2 = [];
-createTwoArrays(file);
-
 function createTwoArrays(arr) {
 	let element = [];
 	let selected = true;
@@ -37,14 +32,25 @@ function createTwoArrays(arr) {
 	});
 	arr2.push(Number(element.join("")));
 }
-// sorting the arrays
-arr1.sort((a, b) => a - b);
-arr2.sort((a, b) => a - b);
 
-// calculate difference
-let sum = 0;
-for (let i = 0; i < arr1.length; i++) {
-	sum += Math.abs(arr1[i] - arr2[i]);
-}
+const data = readFile("./input1.txt");
 
-export { readFile, createTwoArrays };
+const arr1 = [];
+const arr2 = [];
+
+createTwoArrays(data);
+
+let total = 0;
+let multiplier = 0;
+
+arr1.forEach((one) => {
+	arr2.forEach((two) => {
+		if (one == two) {
+			multiplier++;
+		}
+	});
+	total += Number(one) * multiplier;
+	multiplier = 0;
+});
+
+console.log(total);
