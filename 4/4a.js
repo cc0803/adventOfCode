@@ -7,13 +7,13 @@ let table = cleanUpData(data);
 let row = table.length;
 let col = table[0].length;
 let colArr = createColArr(table);
-console.log(colArr);
 
 // table.forEach((r) => {
-// 	testRow(r);
+// 	testRowFront(r);
 // });
+
 colArr.forEach((c) => {
-	testRow(c);
+	testRowFront(c);
 });
 console.log(counter);
 
@@ -31,23 +31,18 @@ function createColArr(input) {
 	return output;
 }
 
-function testRow(input) {
-	let back = [];
-	let front = [];
+function testRowFront(input) {
+	let buffer = [];
 
 	for (let i = 0; i < row; i++) {
-		if (input[i] == "X" && i > 2 && i < row - 3) {
+		if (input[i] == "X" && i < row - 3) {
 			for (let k = 0; k < 4; k++) {
-				back.push(input[i - k]);
-				front.push(input[i + k]);
+				buffer.push(input[i + k]);
 			}
-			if (back.join("") == "XMAS") {
+			if (buffer.join("") == "XMAS") {
 				counter++;
 			}
-			if (front.join("") == "XMAS") {
-				counter++;
-			}
-			back = front = [];
+			buffer = [];
 		}
 	}
 }
