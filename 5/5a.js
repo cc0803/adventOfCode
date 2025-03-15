@@ -29,7 +29,8 @@ for (let i = 0; i < rulesRaw.length; i++) {
 		str += rulesRaw[i];
 	}
 }
-console.log(rules);
+str = "";
+buffer = [];
 
 // Make printer Arguments readable;
 let printerRaw = readFile("./test5print.txt");
@@ -48,3 +49,29 @@ for (let i = 0; i < printerRaw.length; i++) {
 		str += printerRaw[i];
 	}
 }
+
+function conformsToRule(input, rule) {
+	let i1 = input.indexOf(rule[0]);
+	let i2 = input.indexOf(rule[1]);
+	if (i1 == -1 || i2 == -1) {
+		return true;
+	}
+	if (i2 < i1) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+function checkPrint(input) {
+	let check = true;
+	for (let i = 0; i < rules.length; i++) {
+		if (!check) {
+			return false;
+		}
+		check = conformsToRule(input, rules[i]);
+	}
+	return true;
+}
+
+console.log(checkPrint(printer[0]));
