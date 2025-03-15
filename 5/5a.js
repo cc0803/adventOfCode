@@ -10,12 +10,31 @@ function readFile(path) {
 	}
 }
 
+// Make rules readable
 let rulesRaw = readFile("./test5rules.txt");
-let printerRaw = readFile("./test5print.txt");
+let rules = [];
 
-let printer = [];
 let buffer = [];
 let str = "";
+for (let i = 0; i < rulesRaw.length; i++) {
+	if (rulesRaw[i] == "|") {
+		buffer.push(str);
+		str = "";
+	} else if (rulesRaw[i] == "\n") {
+		buffer.push(str);
+		rules.push(buffer);
+		buffer = [];
+		str = "";
+	} else {
+		str += rulesRaw[i];
+	}
+}
+console.log(rules);
+
+// Make printer Arguments readable;
+let printerRaw = readFile("./test5print.txt");
+let printer = [];
+
 for (let i = 0; i < printerRaw.length; i++) {
 	if (printerRaw[i] == ",") {
 		buffer.push(str);
@@ -29,5 +48,3 @@ for (let i = 0; i < printerRaw.length; i++) {
 		str += printerRaw[i];
 	}
 }
-
-console.log(printer);
