@@ -9,8 +9,7 @@ function readFile(path) {
 	}
 }
 
-// Make rules readable
-let rulesRaw = readFile("./5aRules.txt");
+let rulesRaw = readFile("./test5rules.txt");
 let rules = [];
 
 let buffer = [];
@@ -29,12 +28,12 @@ for (let i = 0; i < rulesRaw.length; i++) {
 	}
 }
 buffer.push(str);
-printer.push(buffer);
+rules.push(buffer);
 buffer = [];
 str = "";
 
 // Make printer Arguments readable;
-let printerRaw = readFile("./5aPrint.txt");
+let printerRaw = readFile("./test5print.txt");
 let printer = [];
 
 for (let i = 0; i < printerRaw.length; i++) {
@@ -50,7 +49,6 @@ for (let i = 0; i < printerRaw.length; i++) {
 		str += printerRaw[i];
 	}
 }
-
 buffer.push(str);
 printer.push(buffer);
 buffer = [];
@@ -80,21 +78,12 @@ function checkPrint(input) {
 	return true;
 }
 
-let correct = [];
+let incorrect = [];
 
 for (let i = 0; i < printer.length; i++) {
-	if (checkPrint(printer[i])) {
-		correct.push(printer[i]);
+	if (!checkPrint(printer[i])) {
+		incorrect.push(printer[i]);
 	}
 }
 
-function middleValue(input) {
-	let accumulator = 0;
-	for (let i = 0; i < input.length; i++) {
-		let middle = Math.floor(input[i].length / 2 - 0.5);
-		accumulator += Number(input[i][middle]);
-	}
-	return accumulator;
-}
-
-console.log(middleValue(correct));
+console.log(rules);
