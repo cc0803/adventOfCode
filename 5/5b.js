@@ -86,4 +86,12 @@ for (let i = 0; i < printer.length; i++) {
 	}
 }
 
-console.log(rules);
+function needsRules(input) {
+	let apply = [];
+	for (let i = 0; i < rules.length; i++) {
+		if (rules[i][0] == input) {
+			apply.push(rules[i][0]);
+		}
+	}
+	return apply;
+}
